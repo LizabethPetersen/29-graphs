@@ -1,25 +1,25 @@
-export default (startNode, endNode, goalNode) => {
+export default (graph, startNode, goalNode) => {
   const queue = [];
-
   const visitedNodes = new Set();
 
   const parentMap = new Map();
+  const currentNode = startNode.next;
 
-  queue.enqueue(startNode);
+  queue.push(startNode);
+  
   visitedNodes.add(startNode);
 
   while (queue.length) {
-    const currentNode = queue.dequeue();
-  }
+    currentNode.queue.shift();
 
-  if (currentNode === goalNode) {
-    return parentMap;
-  }
+    if (currentNode === goalNode) {
+      return parentMap;
+    }
 
-  const neighbors = graph.getNeighbors(currentNode);
-  console.log(neighbors, 'NEIGHBORS');
+    const neighbors = graph.getNeighbors(currentNode);
+    console.log(neighbors, 'NEIGHBORS');
 
-  /* eslint-disable */
+    /* eslint-disable */
   for (let neighbor of neighbors) {
     let neighborNode = neighbor.node;
 
@@ -30,7 +30,8 @@ export default (startNode, endNode, goalNode) => {
     visitedNodes.add(neighborNode);
 
     parentMap.set(neighborNode, currentNode);
-    queue.enqueue(neighborNode);
+    queue.shift(neighborNode);
   }
 }
 return null;
+}
