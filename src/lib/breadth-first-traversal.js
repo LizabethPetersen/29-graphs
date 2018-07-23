@@ -1,23 +1,20 @@
 export default (graph, startNode, goalNode) => {
   const queue = [];
   const visitedNodes = new Set();
-
   const parentMap = new Map();
-  const currentNode = startNode.next;
 
   queue.push(startNode);
-  
   visitedNodes.add(startNode);
 
   while (queue.length) {
-    currentNode.queue.shift();
+    const currentNode = queue.shift();
 
     if (currentNode === goalNode) {
       return parentMap;
     }
 
     const neighbors = graph.getNeighbors(currentNode);
-    console.log(neighbors, 'NEIGHBORS');
+    console.log(neighbors, 'NEIGHBORS'); /* eslint-disable-line */
 
     /* eslint-disable */
   for (let neighbor of neighbors) {
